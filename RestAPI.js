@@ -24,8 +24,6 @@ app.listen(port, async function() {
     catch (err){
         console.error('Failed to start server ', err);
     }
-    
-    
 });
 
 //?Log user in 
