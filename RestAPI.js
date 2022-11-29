@@ -114,7 +114,7 @@ app.get('/messages', authCheck, async function(req, res) {
 });
 
 //Get specific request
-app.get('/messages/:id', async function(req, res) {
+app.get('/messages/:id', authCheck, async function(req, res) {
     try {
         let message = await  Message.findOne({
             where: { id: req.params.id }
@@ -151,7 +151,7 @@ app.post(/messages/, async function(req, res, next) {
 
 //Put requests
 
-app.put('/messages/:id', async function(req, res, next) {
+app.put('/messages/:id', authCheck, async function(req, res, next) {
 try{
     let message = await  Message.findOne({
         where: { id: req.params.id }
@@ -181,7 +181,7 @@ try{
 
 //Delete requests
 
-app.delete(/messages/, function(req, res) {
+app.delete(/messages/, authCheck, function(req, res) {
     res.send('Hello World');
 });
 
