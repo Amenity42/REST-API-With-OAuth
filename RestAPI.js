@@ -88,9 +88,17 @@ app.post('/login', async (req, res, next) =>{
 
 });
 
-//Get all request
-app.get('/messages', async function(req, res) {
-    console.log(req.user);
+//?Send 403 if user is not authed 
+const authCheck = (req, res, next) =>{
+    if(!req.user){
+        res.status(403).send();
+        return 
+    }
+    next();
+}
+//?Get all request
+app.get('/messages', authCheck, async function(req, res) {
+    
     try {
         let message = await  Message.findAll({where: {id: req.user.id}});
         res.status(201).send(message);
